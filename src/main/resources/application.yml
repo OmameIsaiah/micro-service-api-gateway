@@ -8,40 +8,40 @@ spring:
       routes:
         ## ACCOUNT MICRO SERVICE
         - id: account-micro-service
-          uri: http://localhost:2021/account
+          uri: http://63.250.55.150:6060/account-micro-service
           ##OR http://localhost:2021 or lb://account-micro-service
           predicates:
-            - Path=/account/**
+            - Path=/account-micro-service/**
           filters:
             - StripPrefix=1
           ##filters – Here, you can modify requests and responses before or after sending the downstream request. Here I’m removing prefix and setting it to identify the correct API, Otherwise, http://localhost:2021/account will route into http://localhost:2021/account
         ## ADMIN MICRO SERVICE
         - id: admin-micro-service
-          uri: http://localhost:2022/admin
+          uri: http://63.250.55.150:6060/admin-micro-service
           ##OR http://localhost:2022 or lb://admin-micro-service
           predicates:
-            - Path=/admin/**
+            - Path=/admin-micro-service/**
           filters:
             - StripPrefix=1
         ## CARD MICRO SERVICE
         - id: card-micro-service
-          uri: http://localhost:2023/card
+          uri: http://63.250.55.150:6060/card-micro-service
           ##OR http://localhost:2023 or lb://card-micro-service
           predicates:
-            - Path=/card/**
+            - Path=/card-micro-service/**
           filters:
             - StripPrefix=1
         ## ENGAGE MICRO SERVICE
         - id: engage-micro-service
-          uri: http://localhost:2024/engage
+          uri: http://63.250.55.150:6060/engage-micro-service
           ##OR http://localhost:2024 or lb://engage-micro-service
           predicates:
-            - Path=/engage/**
+            - Path=/engage-micro-service/**
           filters:
             - StripPrefix=1
         ## CARD MICRO SERVICE
         - id: admin-server
-          uri: http://localhost:2031/admin-server
+          uri: http://63.250.55.150:6060/admin-server
           ##OR http://localhost:2031 or lb://admin-server
           predicates:
             - Path=/admin-server/**
@@ -49,9 +49,11 @@ spring:
             - StripPrefix=1
 
 server:
-  port: 2030
+  port: 6060
+  servlet:
+    contextPath: /api-gateway
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:2020/eureka
+      defaultZone: http://63.250.55.150:6060/eureka
