@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: micro-service-api-gateway
+
+  ##GATEWAY CONFIGURATIONS
+  cloud:
+    gateway:
+      routes:
+        ## ACCOUNT MICRO SERVICE
+        - id: account-micro-service
+          uri: http://localhost:2021/account
+          ##OR http://localhost:2021 or lb://account-micro-service
+          predicates:
+            - Path=/account/**
+          filters:
+            - StripPrefix=1
+          ##filters – Here, you can modify requests and responses before or after sending the downstream request. Here I’m removing prefix and setting it to identify the correct API, Otherwise, http://localhost:2021/account will route into http://localhost:2021/account
+        ## ADMIN MICRO SERVICE
+        - id: admin-micro-service
+          uri: http://localhost:2022/admin
+          ##OR http://localhost:2022 or lb://admin-micro-service
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+        ## CARD MICRO SERVICE
+        - id: card-micro-service
+          uri: http://localhost:2023/card
+          ##OR http://localhost:2023 or lb://card-micro-service
+          predicates:
+            - Path=/card/**
+          filters:
+            - StripPrefix=1
+        ## ENGAGE MICRO SERVICE
+        - id: engage-micro-service
+          uri: http://localhost:2024/engage
+          ##OR http://localhost:2024 or lb://engage-micro-service
+          predicates:
+            - Path=/engage/**
+          filters:
+            - StripPrefix=1
+        ## CARD MICRO SERVICE
+        - id: admin-server
+          uri: http://localhost:2031/admin-server
+          ##OR http://localhost:2031 or lb://admin-server
+          predicates:
+            - Path=/admin-server/**
+          filters:
+            - StripPrefix=1
+
+server:
+  port: 2030
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:2020/eureka
