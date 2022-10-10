@@ -65,7 +65,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>micro-service-registry</finalName>
+        <finalName>micro-service-api-gateway</finalName>
         <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
         <plugins>
             <plugin>
